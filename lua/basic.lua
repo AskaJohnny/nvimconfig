@@ -18,4 +18,20 @@ vim.wo.signcolumn = "yes"
 
 vim.o.showtabline = 2
 
+-- Tab
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+
+--系统剪切板
+vim.opt.clipboard:append('unnamedplus')
+-- 搜索
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+-- 外观
+vim.opt.termguicolors = true
+
+
+--timeout
 

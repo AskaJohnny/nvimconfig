@@ -19,6 +19,19 @@ map("n", "<C-k>", "<C-w>k", opt)
 map("n", "<C-l>", "<C-w>l", opt)
 
 
+map('i', 'jk', '<ESC>', opt)
+--operator-pending mode 模式下
+map('o','jk', '<ESC>', opt)
+map('n', '<leader>w', '<C-w>', opt)
+
+
+---视觉模式V-----
+map("v", "jk", '<ESC>', opt)
+-- 单行或多行移动
+map("v", "J", ":m '>+1<CR>gv=gv", opt)
+map("v", "K", ":m '<-2<CR>gv=gv", opt)
+
+
 -- Terminal相关
 map("n", "<leader>t", ":sp | terminal<CR>", opt)
 map("n", "<leader>vt", ":vsp | terminal<CR>", opt)
