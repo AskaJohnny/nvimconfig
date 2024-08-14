@@ -38,29 +38,31 @@ return {
 
 		api.events.subscribe(Event.FileCreated, function(data)
 			if data.fname:match("%.java$") then
-				vim.cmd("edit " .. data.fname)
-				local buf_index = vim.fn.bufnr("%")
-				-- 假设你的包名根目录是 "src/main/java"，移除之前的部分
-				local package_path = data.fname:match(".*/src/main/java/(.*)/.*%.java")
-				-- 替换路径分隔符 '/' 为 '.'
-				local package_name = package_path:gsub("/", ".")
-				-- 将路径中的斜杠替换为点
-				local filename_base = vim.fn.expand("%:t:r")
-				local code = "package "
-					.. package_name
-					.. [[;
-
-public class ]]
-					.. filename_base
-					.. [[ {
-    public static void main(String[] args) {
-
-    }
-}
-]]
-
-				local lines = vim.split(code, "\n")
-				vim.api.nvim_buf_set_lines(buf_index, 0, -1, false, lines)
+				-- 这里的大概意思就是 创建java文件的时候 会去写一个模版进去
+				java_handler.handle_java_file(data)
+				--
+				-- 				vim.cmd("edit " .. data.fname)
+				-- 				local buf_index = vim.fn.bufnr("%")
+				-- 				-- 假设你的包名根目录是 "src/main/java"，移除之前的部分
+				-- 				local package_path = data.fname:match(".*/src/main/java/(.*)/.*%.java")
+				-- 				-- 替换路径分隔符 '/' 为 '.'
+				-- 				local package_name = package_path:gsub("/", ".")
+				-- 				-- 将路径中的斜杠替换为点
+				-- 				local filename_base = vim.fn.expand("%:t:r")
+				-- 				local code = "package "
+				-- 					.. package_name
+				-- 					.. [[;
+				--
+				-- public class ]]
+				-- 					.. filename_base
+				-- 					.. [[ {
+				--     public static void main(String[] args) {
+				--
+				--     }
+				-- }
+				-- ]]
+				-- 				local lines = vim.split(code, "\n")
+				-- 				vim.api.nvim_buf_set_lines(buf_index, 0, -1, false, lines)
 			end
 		end)
 
