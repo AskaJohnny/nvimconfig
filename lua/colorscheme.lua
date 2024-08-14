@@ -5,3 +5,5 @@ if not status_ok then
   return
 end
 
+vim.api.nvim_set_hl(0, "Visual", { bg = "#4a4263", fg = "NONE", ctermbg = 242 })
+
