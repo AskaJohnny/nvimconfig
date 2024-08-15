@@ -34,8 +34,8 @@ return {
                     keymaps = {
                         init_selection = "<CR>", -- set to `false` to disable one of the mappings
                         node_incremental = "<CR>",
-                        scope_incremental = "<BS>",
-                        node_decremental = "<BS>",
+                        -- scope_incremental = "<BS>",
+                        -- node_decremental = "<BS>",
                     },
                 },
                 --                rainbow = {

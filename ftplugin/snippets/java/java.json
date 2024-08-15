@@ -1,0 +1,14 @@
+{
+    "init": {
+        "prefix": "init",
+        "body": [
+            "package ${TM_PACKAGE};",
+            "public class ${TM_FILENAME_BASE} ",
+            "      public static void main(String[] args) {",
+            "            ${1}",
+            "    }",
+            "}"
+        ],
+        "description": "init"
+    }
+}

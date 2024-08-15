@@ -1,0 +1,22 @@
+{
+    "name": "custom-snippets",
+    "engines": {
+        "vscode": "^1.11.0"
+    },
+    "contributes": {
+        "snippets": [
+            {
+                "language": [
+                    "java"
+                ],
+                "path": "./java/java.json"
+            },
+            {
+                "language": [
+                    "java"
+                ],
+                "path": "./spring/spring.json"
+            }
+        ]
+    }
+}
