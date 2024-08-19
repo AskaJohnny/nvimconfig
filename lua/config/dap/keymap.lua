@@ -22,6 +22,7 @@ function M.on_attach(ls, buffer)
     end
 end
 
+-- 作者给出的 保存和恢复断点的方法 https://github.com/mfussenegger/nvim-dap/issues/198k
 local breakpoints = require("dap.breakpoints")
 
 function M.store()
