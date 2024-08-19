@@ -5,7 +5,6 @@ local widgets = require("dap.ui.widgets")
 
 local M = {}
 
-
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(arg)
         local buffer = arg.buf
@@ -23,10 +22,47 @@ function M.on_attach(ls, buffer)
     end
 end
 
+local breakpoints = require("dap.breakpoints")
+
+function M.store()
+    local bps = {}
+    local breakpoints_by_buf = breakpoints.get()
+    for buf, buf_bps in pairs(breakpoints_by_buf) do
+        bps[tostring(buf)] = buf_bps
+    end
+    local fp = io.open("/tmp/breakpoints.json", "w")
+    fp:write(vim.fn.json_encode(bps))
+    fp:close()
+    -- 自己加的清掉
+    dap.clear_breakpoints()
+end
+
+function M.load()
+    local fp = io.open("/tmp/breakpoints.json", "r")
+    local content = fp:read("*a")
+    local bps = vim.fn.json_decode(content)
+    for buf, buf_bps in pairs(bps) do
+        for _, bp in pairs(buf_bps) do
+            local line = bp.line
+            local opts = {
+                condition = bp.condition,
+                log_message = bp.logMessage,
+                hit_condition = bp.hitCondition,
+            }
+            breakpoints.set(opts, tonumber(buf), line)
+        end
+    end
+end
+
 function M.setup_dap_keymaps(buffer)
     wk.register({
         name = "Debug",
         e = {
+            ["dc"] = { dap.clear_breakpoints, "clear all breakpoints" },
+            -- 下面2个是 github上坐着给出的方法
+            ["ds"] = { M.store, "Disable all breakpoints" },
+            ["dr"] = { M.load, "Restore all breakpoints" },
+
             ["t"] = { dap.toggle_breakpoint, "Toggle breakpoint" },
 
             ["r"] = { dap.restart, "Restart" },
