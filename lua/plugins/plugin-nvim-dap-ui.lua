@@ -45,7 +45,7 @@ return {
                 else
                     local cur_win = vim.api.nvim_get_current_win()
                     -- open terminal
-                    vim.api.nvim_command("belowright 8new")
+                    vim.api.nvim_command("belowright 14new")
                     local bufnr = vim.api.nvim_get_current_buf()
                     vim.bo[bufnr].modifiable = false
                     vim.bo[bufnr].swapfile = false
@@ -74,12 +74,12 @@ return {
                     dap.listeners.after.event_initialized["dapui_config"] = function()
                         require("dapui").open()
                     end
-                    -- dap.listeners.before.event_terminated["dapui_config"] = function()
-                    --   dapui.close()
-                    -- end
-                    -- dap.listeners.before.event_exited["dapui_config"] = function()
-                    --   dapui.close()
-                    -- end
+                    dap.listeners.before.event_terminated["dapui_config"] = function()
+                        dapui.close()
+                    end
+                    dap.listeners.before.event_exited["dapui_config"] = function()
+                        dapui.close()
+                    end
                     -- nvim-dap
                     vim.api.nvim_create_user_command("DapUIOpen", function()
                         M.dapui_active = true

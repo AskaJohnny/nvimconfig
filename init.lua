@@ -24,6 +24,8 @@ vim.cmd([[
   augroup END
 ]])
 
+-- vim.api.nvim_set_keymap("n", "<leader>q", ":enew<bar>bd #<CR>", { noremap = true, silent = true })
+
 -- vim.api.nvim_create_user_command("PrintWinBufMap", function()
 --     for _, win in ipairs(vim.api.nvim_list_wins()) do
 --         local buf = vim.api.nvim_win_get_buf(win)

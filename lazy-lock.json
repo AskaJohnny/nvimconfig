@@ -37,8 +37,11 @@
   "rainbow-delimiters.nvim": { "branch": "master", "commit": "0543d6ff37d3178e37131dfd5486e8a75d52f696" },
   "schemastore.nvim": { "branch": "main", "commit": "0d18cb5f8faf160335b4ed4699b6b35c616de5b9" },
   "telescope.nvim": { "branch": "master", "commit": "d90956833d7c27e73c621a61f20b29fdb7122709" },
+  "toggle-fullscreen.nvim": { "branch": "main", "commit": "36ee6faeb33cd8aa5b4c66c0b7e7df96a9aaf2b6" },
   "toggleterm.nvim": { "branch": "main", "commit": "137d06fb103952a0fb567882bb8527e2f92d327d" },
   "vim-illuminate": { "branch": "master", "commit": "5eeb7951fc630682c322e88a9bbdae5c224ff0aa" },
   "vim-tmux-navigator": { "branch": "master", "commit": "5b3c701686fb4e6629c100ed32e827edf8dad01e" },
-  "which-key.nvim": { "branch": "main", "commit": "6c1584eb76b55629702716995cca4ae2798a9cca" }
+  "vim-win": { "branch": "master", "commit": "0e59f4254c8ec8a452b57ad4ae7b73a86f53557a" },
+  "which-key.nvim": { "branch": "main", "commit": "6c1584eb76b55629702716995cca4ae2798a9cca" },
+  "zen-mode.nvim": { "branch": "main", "commit": "29b292bdc58b76a6c8f294c961a8bf92c5a6ebd6" }
 }

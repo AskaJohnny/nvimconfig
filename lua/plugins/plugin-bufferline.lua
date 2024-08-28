@@ -95,6 +95,75 @@ return {
                     sort_by = "insert_after_current", -- other options: 'insert_at_end' | 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs'
                 },
             })
+            -- bufferline 快捷键映射
+            local opts = { noremap = true, silent = true }
+
+            -- 切换到上一个/下一个 buffer
+            vim.api.nvim_set_keymap("n", "<A-,>", "<Cmd>BufferLineCyclePrev<CR>", opts)
+            vim.api.nvim_set_keymap("n", "<A-.>", "<Cmd>BufferLineCycleNext<CR>", opts)
+
+            -- 按住 Alt + 数字键直接跳转到对应位置的 buffer
+            vim.api.nvim_set_keymap("n", "<A-1>", "<Cmd>BufferLineGoToBuffer 1<CR>", opts)
+            vim.api.nvim_set_keymap("n", "<A-2>", "<Cmd>BufferLineGoToBuffer 2<CR>", opts)
+            vim.api.nvim_set_keymap("n", "<A-3>", "<Cmd>BufferLineGoToBuffer 3<CR>", opts)
+            vim.api.nvim_set_keymap("n", "<A-4>", "<Cmd>BufferLineGoToBuffer 4<CR>", opts)
+            vim.api.nvim_set_keymap("n", "<A-5>", "<Cmd>BufferLineGoToBuffer 5<CR>", opts)
+            vim.api.nvim_set_keymap("n", "<A-6>", "<Cmd>BufferLineGoToBuffer 6<CR>", opts)
+            vim.api.nvim_set_keymap("n", "<A-7>", "<Cmd>BufferLineGoToBuffer 7<CR>", opts)
+            vim.api.nvim_set_keymap("n", "<A-8>", "<Cmd>BufferLineGoToBuffer 8<CR>", opts)
+            vim.api.nvim_set_keymap("n", "<A-9>", "<Cmd>BufferLineGoToBuffer 9<CR>", opts)
+            vim.api.nvim_set_keymap("n", "<A-0>", "<Cmd>BufferLineGoToBuffer -1<CR>", opts) -- -1 跳转到最后一个 buffer
+
+            -- 移动 buffer 的位置
+            vim.api.nvim_set_keymap("n", "<A-<>", "<Cmd>BufferLineMovePrev<CR>", opts)
+            vim.api.nvim_set_keymap("n", "<A->>", "<Cmd>BufferLineMoveNext<CR>", opts)
+
+            -- Pin/unpin buffer (暂时未被 bufferline.nvim 支持)
+            -- vim.api.nvim_set_keymap("n", "<A-p>", "<Cmd>BufferPin<CR>", opts)  -- 目前没有 pin 功能
+
+            vim.api.nvim_set_keymap("n", "<A-c>", "<Cmd>Bdelete<CR>", opts)
+            vim.api.nvim_set_keymap("n", "<A-o>", "<Cmd>BufferLineCloseOthers<CR>", opts)
+            -- 下面是gpt帮我生成的 关于关闭当前 buffer ,因为bufferline 没有提供关闭当前的 barbar提供了 ,但是bufferline提供了 关闭other
+
+            local function CloseCurrentAndFocusLeft()
+                -- 获取当前缓冲区和左侧缓冲区的编号
+                local current_buf = vim.api.nvim_get_current_buf()
+                local prev_buf = vim.fn.bufnr("#")
+                -- 获取所有列出的缓冲区
+                local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+
+                -- 如果只有一个缓冲区，则不执行关闭操作
+                if #buffers <= 1 then
+                    print("Only one buffer open, cannot close the current buffer.")
+                    return
+                end
+
+                -- 如果没有其他缓冲区，直接返回
+                if prev_buf == -1 then
+                    print("No left buffer to focus.")
+                    return
+                end
+
+                -- 切换到左侧缓冲区
+                vim.cmd("b " .. prev_buf)
+
+                -- 删除当前缓冲区
+                vim.cmd("bdelete " .. current_buf)
+            end
+
+            -- 将函数绑定到快捷键
+            vim.api.nvim_set_keymap(
+                "n",
+                "<leader>q",
+                "",
+                { noremap = true, silent = true, callback = CloseCurrentAndFocusLeft }
+            )
+            -- vim.api.nvim_set_keymap(
+            --     "n",
+            --     "<leader>q",
+            --     "<cmd>lua close_current_and_focus_left()<CR>",
+            --     { noremap = true, silent = true }
+            -- )
         end,
     },
 }
