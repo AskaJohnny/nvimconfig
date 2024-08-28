@@ -33,5 +33,7 @@ vim.opt.smartcase = true
 vim.opt.termguicolors = true
 
 
+vim.o.hidden = true
+
 --timeout
 

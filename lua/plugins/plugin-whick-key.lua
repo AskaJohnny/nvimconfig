@@ -1,6 +1,7 @@
 return {
     {
         "git@github.com:flolke/which-key.nvim",
+        -- "git@github.com:flolke/which-key.nvim",
         init = function()
             vim.o.timeout = true
             vim.o.timeoutlen = 300

@@ -2,6 +2,21 @@ return {
 	{
 		"Pocco81/auto-save.nvim",
 		config = function()
+			-- 这里是 自动格式化 但是感觉有点卡不知道
+			-- vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+			-- 	pattern = "*.*",
+			-- 	callback = function()
+			-- 		vim.lsp.buf.format()
+			-- 	end,
+			-- })
+			--
+			-- vim.api.nvim_create_autocmd({ "TextChanged" }, {
+			-- 	-- hello
+			-- 	pattern = "*.*",
+			-- 	callback = function()
+			-- 		vim.lsp.buf.format()
+			-- 	end,
+			-- })
 			require("auto-save").setup({
 				enabled = true, -- start auto-save when the plugin is loaded (i.e. when your package manager loads it)
 				execution_message = {
@@ -30,7 +45,9 @@ return {
 					enabling = nil, -- ran when enabling auto-save
 					disabling = nil, -- ran when disabling auto-save
 					before_asserting_save = nil, -- ran before checking `condition`
-					before_saving = nil, -- ran before doing the actual save
+					-- ran before doing the actual save
+					-- this is a bug 这里应该是一个bug auto-save的bug
+					before_saving = nil,
 					after_saving = nil, -- ran after doing the actual save
 				},
 			})

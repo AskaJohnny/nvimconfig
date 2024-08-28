@@ -24,6 +24,13 @@ vim.cmd([[
   augroup END
 ]])
 
+vim.api.nvim_create_user_command("PrintWinBufMap", function()
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+        local buf = vim.api.nvim_win_get_buf(win)
+        print("Window ID: " .. win .. ", Buffer ID: " .. buf)
+    end
+end, {})
+
 -- -- 定义 winbar 的 Lua 函数
 -- function MyWinbar()
 --     if vim.bo.filetype == "toggleterm" then

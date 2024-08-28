@@ -2,7 +2,7 @@ local HOME = os.getenv("HOME")
 local WORKSPACE_PATH = HOME .. "/java/newworkspace/"
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = WORKSPACE_PATH
-
+---- "/Users/johnny/.local/share/nvim/lsp/jdt-language-server/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar",
 local config = {
     autostart = true,
     cmd = {
@@ -18,11 +18,11 @@ local config = {
         "java.base/java.util=ALL-UNNAMED",
         "--add-opens",
         "java.base/java.lang=ALL-UNNAMED",
-        "-javaagent:/Users/johnny/.config/nvim/ftplugin/lombok-1.18.24.jar",
+        "-javaagent:/Users/johnny/.config/nvim/ftplugin/lombok-1.18.32.jar",
         "-jar",
-        "/Users/johnny/.local/share/nvim/lsp/jdt-language-server/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar",
+        "/Users/johnny/.local/share/nvim/lsp/jdt-language-server-1.38.0/plugins/org.eclipse.equinox.launcher_1.6.900.v20240613-2009.jar",
         "-configuration",
-        "/Users/johnny/.local/share/nvim/lsp/jdt-language-server/config_mac",
+        "/Users/johnny/.local/share/nvim/lsp/jdt-language-server-1.38.0/config_mac_arm",
         "-data",
         workspace_dir,
     },

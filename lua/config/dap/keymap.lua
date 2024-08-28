@@ -77,6 +77,84 @@ function M.setup_dap_keymaps(buffer)
                     dap.continue()
                     require("nvim-tree.api").tree.close()
                     _G.tree_status_open = false
+                    local dapui = require("dapui")
+                    local function dapui_is_open()
+                        local dapui_windows = {
+                            "dapui_watches",
+                            "dapui_breakpoints",
+                            "dapui_scopes",
+                            "dapui_stacks",
+                            "dapui_terminate",
+                        }
+
+                        local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+                        for _, buf in ipairs(buffers) do
+                            if vim.tbl_contains(dapui_windows, vim.bo[buf.bufnr].filetype) then
+                                return true
+                            end
+                        end
+                        return false
+                    end
+                    -- vim.api.nvim_create_autocmd("BufWinEnter", {
+                    --     callback = function()
+                    --         vim.defer_fn(function()
+                    --             if require("dap").session() and not dapui_is_open() then
+                    --                 dapui.open({})
+                    --             end
+                    --         end, 5) -- 延迟 100 毫秒执行
+                    --     end,
+                    --     group = vim.api.nvim_create_augroup("DapUiAutoOpen", { clear = true }),
+                    -- })
+                    -- vim.api.nvim_create_autocmd("FileType", {
+                    --     pattern = {
+                    --         "dapui_watches",
+                    --         "dapui_stacks",
+                    --         "dapui_breakpoints",
+                    --         "dapui_scopes",
+                    --         "dapui_console",
+                    --         "dapui_repl",
+                    --     },
+                    --     callback = function()
+                    --         print("local....")
+                    --         local win_id = vim.api.nvim_get_current_win()
+                    --         local buf_id = vim.api.nvim_get_current_buf()
+                    --         -- 打印窗口和缓冲区信息
+                    --         print("Current Window ID: " .. win_id)
+                    --         print("Current Buffer ID: " .. buf_id)
+                    --         vim.cmd("setlocal winfixwidth")
+                    --         vim.cmd("setlocal winfixheight")
+                    --
+                    --         -- 打印所有窗口ID
+                    --         local wins = vim.api.nvim_list_wins()
+                    --         print("All window IDs:")
+                    --         for _, id in ipairs(wins) do
+                    --             print(id)
+                    --         end
+                    --     end,
+                    -- })
+                    vim.api.nvim_create_user_command("PrintWinBufMap", function()
+                        for _, win in ipairs(vim.api.nvim_list_wins()) do
+                            local buf = vim.api.nvim_win_get_buf(win)
+                            print("Window ID: " .. win .. ", Buffer ID: " .. buf)
+                        end
+                    end, {})
+
+                    vim.api.nvim_create_autocmd("FileType", {
+                        pattern = "*",
+                        callback = function()
+                            local win_id = vim.api.nvim_get_current_win()
+                            local buf_id = vim.api.nvim_get_current_buf()
+                            print(win_id)
+                            print(buf_id)
+                            if buf_id then
+                                local old_ft = vim.api.nvim_buf_get_option(buf_id, "filetype")
+                            end
+                            vim.schedule(function()
+                                local new_ft = vim.api.nvim_buf_get_option(buf_id, "filetype")
+                                print("FileType changed win_id:", win_id,  " buffer from" ,old_ft, "to", new_ft)
+                            end)
+                        end,
+                    })
                 end,
                 "Continue debug",
             },

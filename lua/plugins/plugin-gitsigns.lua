@@ -42,9 +42,10 @@ return {
 					row = 0,
 					col = 1,
 				},
-				yadm = {
-					enable = false,
-				},
+                -- TODO 不知道什么抛错了
+				-- yadm = {
+				-- 	enable = false,
+				-- },
 				on_attach = function(bufnr)
 					vim.cmd([[highlight GitSignsCurrentLineBlame guifg=#aaaaaa guibg=NONE]])
 

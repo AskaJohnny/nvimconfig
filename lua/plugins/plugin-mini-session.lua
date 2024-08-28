@@ -1,0 +1,54 @@
+return {{}}
+-- return {
+--     {
+--         "echasnovski/mini.nvim",
+--         version = "*",
+--         config = function()
+--             vim.opt.sessionoptions:append("globals")
+--             require("mini.sessions").setup({
+--                 autoread = true,
+--                 autowrite = true,
+--
+--                 -- directory defaults to "session" subdir of user data directory from stdpath()
+--                 directory = nil,
+--
+--                 file = "Session.vim",
+--
+--                 force = {
+--                     read = false,
+--                     write = true,
+--                     delete = false,
+--                 },
+--
+--                 hooks = {
+--                     pre = {
+--                         read = function()
+--                             print("bbbread")
+--                         end,
+--                         write = function()
+--                             print("aaawrite")
+--                             vim.api.nvim_exec_autocmds("User", { pattern = "SessionSavePre" })
+--                         end,
+--                         delete = nil,
+--                     },
+--                     post = {
+--                         read = nil,
+--                         write = nil,
+--                         delete = nil,
+--                     },
+--                 },
+--
+--                 verbose = {
+--                     read = false,
+--                     write = true,
+--                     delete = true,
+--                 },
+--             })
+--             -- vim.api.nvim_create_autocmd("VimEnter", {
+--             --     callback = function()
+--             --         require("mini.sessions").read(nil, { force = true })
+--             --     end,
+--             -- })
+--         end,
+--     },
+-- }
