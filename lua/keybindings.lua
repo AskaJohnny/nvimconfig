@@ -45,7 +45,7 @@ map("n", "<leader>nh", ":nohl<CR>", opt)
 -- map('n', 'gr', '<cmd>Lspsaga finder ref<CR>', opt)
 map("n", "<leader>co", "<cmd>Lspsaga outline<CR>", opt)
 map("n", "<leader>ck", "<cmd>Lspsaga show_buf_diagnostics<CR>", opt)
-map("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opt)
+map("n", "<leader>cn", "<cmd>Lspsaga rename<CR>", opt)
 map("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opt)
 map("v", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opt)
 

@@ -34,8 +34,7 @@ return {
                     truncate_names = true, -- whether or not tab names should be truncated
                     tab_size = 18,
                     diagnostics = false,   -- "nvim_lsp" or "coc" can be used instead
-                    diagnostics_update_in_insert = false, -- only applies to coc
-                    diagnostics_update_on_event = true, -- use nvim's diagnostic handler
+                    diagnostics_update_in_insert = false, -- only applies to coc diagnostics_update_on_event = true, -- use nvim's diagnostic handler
                     diagnostics_indicator = function(count, level, diagnostics_dict, context)
                         return "(" .. count .. ")"
                     end,
@@ -121,10 +120,9 @@ return {
             -- Pin/unpin buffer (暂时未被 bufferline.nvim 支持)
             -- vim.api.nvim_set_keymap("n", "<A-p>", "<Cmd>BufferPin<CR>", opts)  -- 目前没有 pin 功能
 
-            vim.api.nvim_set_keymap("n", "<A-c>", "<Cmd>Bdelete<CR>", opts)
             vim.api.nvim_set_keymap("n", "<A-o>", "<Cmd>BufferLineCloseOthers<CR>", opts)
-            -- 下面是gpt帮我生成的 关于关闭当前 buffer ,因为bufferline 没有提供关闭当前的 barbar提供了 ,但是bufferline提供了 关闭other
 
+            -- 下面是gpt帮我生成的 关于关闭当前 buffer ,因为bufferline 没有提供关闭当前的 barbar提供了 ,但是bufferline提供了 关闭other
             local function CloseCurrentAndFocusLeft()
                 -- 获取当前缓冲区和左侧缓冲区的编号
                 local current_buf = vim.api.nvim_get_current_buf()
