@@ -1,0 +1,16 @@
+{
+    "name": "snippets-collect",
+    "engines": {
+        "vscode": "^1.11.0"
+    },
+    "contributes": {
+        "snippets": [
+            {
+                "language": [
+                    "yaml"
+                ],
+                "path": "./k8s/k8s_snippetes.json"
+            }
+        ]
+    }
+}

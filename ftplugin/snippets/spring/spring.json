@@ -71,23 +71,18 @@
     "Spring Boot Controller GET action": {
         "prefix": "api-get",
         "body": [
-            "@GetMapping",
-            "public Results<${1:Item}> get${1:Item}() {",
-            "    Optional<${1:Item}> ${1:Item} = Optional.empty();",
-            "",
-            "    ${1:Item} = Optional.of(new ${1:Item}());",
-            "",
-            "    if (${1:Item}.isPresent()) {",
-            "        return ResponseEntity.ok(${1:Item}.get());",
-            "    } else {",
-            "        return ResponseEntity.notFound().build();",
+            "    @GetMapping(\"simpleGet\")",
+            "    public Result<Void> simpleGet() {",
+            "        return Result.success();",
             "    }",
-            "}"
+            ""
         ],
         "description": "Spring Boot Controller GET action"
     },
     "Generate GET action for all items": {
-        "prefix": ["api-get-all"],
+        "prefix": [
+            "api-get-all"
+        ],
         "body": [
             "@GetMapping",
             "public ResponseEntity<List<${1}>> getAll${1:${TM_FILENAME_BASE/Controller//}}() {",
@@ -106,7 +101,9 @@
         "description": "Spring Boot Controller GET action for all items"
     },
     "Generate GET action for one item": {
-        "prefix": ["api-get-by-id"],
+        "prefix": [
+            "api-get-by-id"
+        ],
         "body": [
             "@GetMapping(\"{id}\")",
             "public ResponseEntity<${1}> get${1:${TM_FILENAME_BASE/Controller//}}ById(@PathVariable(\"id\") int id) {",
@@ -141,7 +138,9 @@
         "description": "Spring Boot Controller GET action with RequestParam"
     },
     "Generate POST action": {
-        "prefix": ["api-post"],
+        "prefix": [
+            "api-post"
+        ],
         "body": [
             "@PostMapping(\"\")",
             "public ResponseEntity<${1}> create${1:${TM_FILENAME_BASE/Controller//}}(@Valid @RequestBody ${2:${1}Dto} ${3:item}) {",
@@ -160,7 +159,9 @@
         "description": "Spring Boot Controller POST action"
     },
     "Generate PUT action": {
-        "prefix": ["api-put"],
+        "prefix": [
+            "api-put"
+        ],
         "body": [
             "@PutMapping(\"{id}\")",
             "public ResponseEntity<${1}> update${1:${TM_FILENAME_BASE/Controller//}}(@PathVariable(\"id\") int id, @Valid @RequestBody ${2:${1}Dto} ${3:item}) {",
@@ -184,7 +185,9 @@
         "description": "Spring Boot Controller PUT action"
     },
     "Generate DELETE action": {
-        "prefix": ["api-delete"],
+        "prefix": [
+            "api-delete"
+        ],
         "body": [
             "@DeleteMapping(\"{id}\")",
             "public ResponseEntity<${1}> delete${1:${TM_FILENAME_BASE/Controller//}}(@PathVariable(\"id\") int id) {",
@@ -240,12 +243,16 @@
     },
     "String": {
         "prefix": "st",
-        "body": ["String"],
+        "body": [
+            "String"
+        ],
         "description": "String"
     },
     "throw new": {
         "prefix": "thr",
-        "body": ["throw new "],
+        "body": [
+            "throw new "
+        ],
         "description": "throw new"
     }
 }

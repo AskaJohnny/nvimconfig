@@ -6,7 +6,7 @@ return {
 		config = function()
 			-- 配置 ToggleTerm 并确保正确设置键映射
 			require("toggleterm").setup({
-				open_mapping = [[<leader>t]], -- 映射 <leader>t 来打开 ToggleTerm
+				open_mapping = [[<leader>tm]], -- 映射 <leader>t 来打开 ToggleTerm
 				hide_numbers = true, -- 隐藏 ToggleTerm 缓冲区中的行号
 				shade_filetypes = {},
 				autochdir = false, -- Neovim 更改目录时，终端将在下次打开时更改目录

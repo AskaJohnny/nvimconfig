@@ -28,6 +28,9 @@ return {
                 require("luasnip.loaders.from_vscode").lazy_load({
                     paths = { "/Users/johnny/.config/nvim/ftplugin/snippets/" },
                 }),
+                require("luasnip.loaders.from_vscode").lazy_load({
+                    paths = { "/Users/johnny/.config/nvim/lua/snippetes/" },
+                }),
                 -- require("luasnip.loaders.from_vscode").lazy_load("/Users/johnny/.local/share/nvim/lazy/friendly-snippets"),
                 -- require("luasnip.test"),
             })

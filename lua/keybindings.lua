@@ -60,3 +60,13 @@ map("t", "<C-h>", [[ <C-\><C-N><C-w>h ]], opt)
 map("t", "<C-j>", [[ <C-\><C-N><C-w>j ]], opt)
 map("t", "<C-k>", [[ <C-\><C-N><C-w>k ]], opt)
 map("t", "<C-l>", [[ <C-\><C-N><C-w>l ]], opt)
+
+
+vim.api.nvim_set_keymap('n', 'ciw', '"_ciw', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'caw', '"_caw', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'diw', '"_diw', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'daw', '"_daw', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'di"', '"_di"', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'da"', '"_da"', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'ca"', '"_ca"', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'ci"', '"_ci"', { noremap = true, silent = true })

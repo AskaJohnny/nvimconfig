@@ -102,7 +102,7 @@ return {
                 sorter = "case_sensitive",
             },
             view = {
-                width = 30,
+                width = 35,
                 preserve_window_proportions = false, -- 保持窗口比例
                 centralize_selection = true,
                 -- float = {

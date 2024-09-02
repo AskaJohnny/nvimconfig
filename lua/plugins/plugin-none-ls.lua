@@ -16,8 +16,14 @@ return {
                     }),
                     null_ls.builtins.formatting.prettierd,
                     null_ls.builtins.formatting.google_java_format.with({
-                        extra_args = { "--aosp" },
+                        command = "google-java-format", -- 使用本地的 google-java-format 命令
+                        args = { "--aosp", "-" }, -- 添加必要的命令行参数，例如 --aosp
+                        to_stdin = true, -- 指定通过 stdin 传递代码
                     }),
+                    -- null_ls.builtins.formatting.google_java_format.with({
+                    --
+                    --     extra_args = { "--aosp" },
+                    -- }),
                     null_ls.builtins.diagnostics.checkstyle.with({
                         command = "/opt/homebrew/bin/checkstyle2",
                         -- 这里覆盖一下 原本的默认配置 Args: { "-f", "sarif", "$ROOT" } 默认配置里面有一个 $ROOT 把整个项目都进行 checkstyle 了 导致超时一开始错误, 然后我加了timeout

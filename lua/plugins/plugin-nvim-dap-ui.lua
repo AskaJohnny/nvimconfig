@@ -36,11 +36,34 @@ return {
             })
 
             local M = { dapui_active = false }
+
+            -- local function auto_close(bufnr)
+            --     local acid
+            --     acid = vim.api.nvim_create_autocmd({ "BufDelete", "BufHidden" }, {
+            --         buffer = bufnr,
+            --         callback = function()
+            --             print("bufd hiddle")
+            --             local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+            --             -- 遍历每个 buffer，关闭与 "dap-terminal" 相关的 buffer
+            --             for _, buf in ipairs(buffers) do
+            --                 if buf.name:match("%[dap%-terminal%]") then
+            --                     print(" force delete buffer")
+            --                     vim.api.nvim_chan_send(vim.b.terminal_job_id, "exit\n")
+            --                     vim.cmd("sleep 1") -- 可根据实际情况调整等待时间
+            --                     vim.api.nvim_buf_delete(buf.bufnr, { force = true })
+            --                     require("dapui").close()
+            --                     M.dapui_active = false
+            --                     vim.api.nvim_del_autocmd(acid)
+            --                 end
+            --             end
+            --         end,
+            --     })
+            -- end
             local dapui_console = dap.defaults.fallback.terminal_win_cmd
             dap.defaults.fallback.terminal_win_cmd = function()
                 if M.dapui_active then
                     local bufnr = dapui_console()
-                    auto_close(bufnr)
+                    -- auto_close(bufnr)
                     return bufnr
                 else
                     local cur_win = vim.api.nvim_get_current_win()
@@ -75,9 +98,31 @@ return {
                         require("dapui").open()
                     end
                     dap.listeners.before.event_terminated["dapui_config"] = function()
+                        -- -- 获取所有已列出的 buffer
+                        local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+
+                        -- 遍历每个 buffer，关闭与 "dap-terminal" 相关的 buffer
+                        for _, buf in ipairs(buffers) do
+                            if buf.name:match("%[dap%-terminal%]") then
+                                vim.api.nvim_buf_delete(buf.bufnr, { force = true })
+                            end
+                        end
                         dapui.close()
                     end
                     dap.listeners.before.event_exited["dapui_config"] = function()
+                        print("exit")
+                        dapui.close()
+                    end
+
+                    dap.listeners.before.disconnect["dapui_config"] = function()
+                        -- -- 获取所有已列出的 buffer
+                        local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+                        -- 遍历每个 buffer，关闭与 "dap-terminal" 相关的 buffer
+                        for _, buf in ipairs(buffers) do
+                            if buf.name:match("%[dap%-terminal%]") then
+                                vim.api.nvim_buf_delete(buf.bufnr, { force = true })
+                            end
+                        end
                         dapui.close()
                     end
                     -- nvim-dap
