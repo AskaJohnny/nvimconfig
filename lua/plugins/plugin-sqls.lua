@@ -10,7 +10,6 @@ return {
                     c = { "<Cmd>SqlsSwitchConnection<CR>", "SqlsSwitchConnection" },
                     e = { "<Cmd>SqlsExecuteQuery<CR>", "SqlsExecuteQuery" },
                 },
-                ["ih"] = { ":<C-U>Gitsigns select_hunk<CR>", "Select hunk", mode = { "o", "x" } },
             }, { buffer = bufnr })
         end,
     },
