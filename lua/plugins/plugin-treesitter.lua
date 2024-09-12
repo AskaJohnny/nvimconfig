@@ -9,7 +9,7 @@ return {
         config = function()
             require("nvim-treesitter.configs").setup({
                 -- 添加不同语言
-                ensure_installed = { "lua", "python", "html", "vue" }, -- one of "all" or a list of languages
+                ensure_installed = { "lua", "python", "html", "vue", "css", "xml", "javascript" }, -- one of "all" or a list of languages
                 sync_install = false,
                 auto_install = true,
                 -- List of parsers to ignore installing (or "all")
@@ -38,11 +38,11 @@ return {
                         -- node_decremental = "<BS>",
                     },
                 },
-                --                rainbow = {
-                --                    enable = true,
-                --                    extended_mode = true, -- 也为非括号字符设置颜色
-                --                    max_file_lines = nil, -- 不限制文件行数
-                --                },
+                -- rainbow = {
+                --     enable = true,
+                --     extended_mode = true, -- 也为非括号字符设置颜色
+                --     max_file_lines = nil, -- 不限制文件行数
+                -- },
                 --
                 --
                 -- 启用 Text Objects 扩展

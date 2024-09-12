@@ -71,7 +71,7 @@
         <!-- 方法不超过50行 -->
         <module name="MethodLength">
             <property name="tokens" value="METHOD_DEF" />
-            <property name="max" value="120" />
+            <property name="max" value="300" />
         </module>
         <!-- 方法的参数个数不超过5个。 并且不对构造方法进行检查-->
         <module name="ParameterNumber">

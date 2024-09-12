@@ -10,6 +10,12 @@
                     "yaml"
                 ],
                 "path": "./k8s/k8s_snippetes.json"
+            },
+            {
+                "language": [
+                    "vue"
+                ],
+                "path": "./vue/vue_snippetes.json"
             }
         ]
     }

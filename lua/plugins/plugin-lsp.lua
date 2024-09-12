@@ -17,6 +17,7 @@ return {
                     "jsonls",
                     "volar",
                     "vtsls",
+                    "lemminx",
                 },
             })
         end,
@@ -65,10 +66,19 @@ return {
                 -- See `:help vim.lsp.*` for documentation on any of the below functions
                 local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
-                vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-                vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+                local map = vim.api.nvim_set_keymap
+                local opt = { noremap = true, silent = true }
+                map("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opt)
+                map("v", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opt)
+                -- glance
+                map("n", "gi", "<cmd>Glance implementations<CR>", opt)
+                map("n", "gr", "<cmd>Glance references<CR>", opt)
+                map("n", "gd", "<cmd>Glance definitions<CR>", opt)
+
+                -- vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+                -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
                 vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-                vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+                -- vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
                 -- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
                 vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
                 vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
@@ -78,19 +88,21 @@ return {
                 vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
                 vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
                 vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
-                vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+                -- vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
                 vim.keymap.set("n", "<space>f", function()
                     vim.lsp.buf.format({ async = true })
                 end, bufopts)
 
                 -- 给个通知
                 --
-                require("notify")("LSP [" .. client.name .. "] 已连接")
+                require("notify")("LSP [" .. client.name .. "] 已连接", "info", {
+                    timeout = 100,
+                })
             end
 
             -- 这里开始是 配置各个语言的 lsp
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            vim.lsp.set_log_level("debug")
+            -- vim.lsp.set_log_level("debug")
             require("lspconfig").lua_ls.setup({
                 capabilities = capabilities,
                 on_attach = on_attach,
@@ -125,6 +137,33 @@ return {
                 capabilities = capabilities,
                 on_attach = on_attach,
             })
+            require("lspconfig").lemminx.setup({
+                capabilities = capabilities,
+                on_attach = on_attach,
+            })
+
+            -- 不知道有什么区别 这个是把volar和ts分开
+            -- local lspconfig = require("lspconfig")
+            -- lspconfig.tsserver.setup({
+            --     on_attach = on_attach,
+            --     init_options = {
+            --         plugins = {
+            --             {
+            --                 name = "@vue/typescript-plugin",
+            --                 location = "/Users/johnny/.npm-global/lib/node_modules/@vue/language-server",
+            --                 languages = { "vue" },
+            --             },
+            --         },
+            --     },
+            -- })
+            -- lspconfig.volar.setup({
+            --     on_attach = on_attach,
+            --     init_options = {
+            --         vue = {
+            --             hybridMode = false,
+            --         },
+            --     },
+            -- })
 
             require("lspconfig").volar.setup({
                 -- capabilities = capabilities,
@@ -136,7 +175,7 @@ return {
                     },
                 },
                 typescript = {
-                    tsdk = "/Users/johnny/.npm/lib/node_modules/typescript/lib",
+                    tsdk = "/Users/johnny/.npm-global/lib/node_modules/typescript/lib",
                     -- Alternative location if installed as root:
                     -- tsdk = '/usr/local/lib/node_modules/typescript/lib'
                 },

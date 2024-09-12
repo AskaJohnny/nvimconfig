@@ -16,9 +16,13 @@ return {
                 print(vim.inspect(added_item))
                 local last_item = list.items[#list.items]
                 if last_item and last_item.value then
-                    require("notify")("Added to Harpoon: " .. last_item.value)
+                    require("notify")("Added to Harpoon: " .. last_item.value, "info", {
+                        timeout = 100,
+                    })
                 else
-                    require("notify")("Failed to Harpoon: " .. last_item.value)
+                    require("notify")("Failed to Harpoon: " .. last_item.value, "info", {
+                        timeout = 100,
+                    })
                 end
             end)
 

@@ -1,0 +1,16 @@
+{
+    "vueinit": {
+        "prefix": "init",
+        "body": [
+            "<script setup>",
+            "</script>",
+            "<template>",
+            "",
+            "</template>",
+            "<style scoped>",
+            "</style>",
+            ""
+        ],
+        "description": "vueinit"
+    }
+}
